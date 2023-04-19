@@ -1,2 +1,27 @@
-[(ngModel)]="loggedID"
+
+<table class="table table-striped table-dark">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Log in date</th>
+        <th scope="col">Number of Clicks</th>
+        <th scope="col">Number of Characters in chat</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>{{loggedInUser.firstName}}</td>
+          <td>{{loggedInUser.lastName}}</td>
+          <td>{{loggedInUser.email}}</td>
+          <td>{{loginTime}}</td>
+          <td>{{ clickCounter }}</td>
+          <td>Null</td>
+        </tr>
+    </tbody>
+</table>
+
+
 <router-outlet></router-outlet>

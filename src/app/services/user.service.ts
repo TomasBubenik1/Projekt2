@@ -6,6 +6,21 @@ import {HttpClient} from '@angular/common/http'
   providedIn: 'root'
 })
 export class UserService {
+  getUsers(): Observable<IUsata> {
+    return this.Http.get<IUsata>(`${this.baseUrl}/users`);
+  }
+
+  private _loggedInUser: IUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}') as IUser;
+
+  get loggedInUser(): IUser {
+    return this._loggedInUser;
+  }
+  private baseUrl = 'https://dummyjson.com';
+
+  set loggedInUser(user: IUser) {
+    this._loggedInUser = user;
+    localStorage.setItem('loggedInUser', JSON.stringify(user));
+  }
 
   constructor(private Http: HttpClient) { }
 

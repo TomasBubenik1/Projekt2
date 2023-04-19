@@ -13,20 +13,25 @@ export class LoginComponent {
 
   firstName: string = '';
   lastName: string = '';
-
+  
   constructor(private router: Router, private userservice: UserService) { }
 
   LoginUser() {
+    const loginTime = new Date();
     // Check if firstName and lastName match the corresponding properties in data
     this.userservice.data.subscribe((data: IUsata) => {
       const foundUser = data.users.find(user => user.firstName === this.firstName && user.lastName === this.lastName);
       if (foundUser) {
+        localStorage.setItem('loginTime', loginTime.toISOString());
+        localStorage.setItem('loggedInUser', JSON.stringify(foundUser));
+
         // Navigate to homepage if user is found
+        this.userservice.loggedInUser = foundUser;
         this.router.navigate(['/hlavnastranka']);
         
       } else {
         // Display error message if user is not found
-        console.log('User not found!');
+        alert('User not found!');
       }
     });
   }
