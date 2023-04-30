@@ -6,30 +6,36 @@ import {HttpClient} from '@angular/common/http'
   providedIn: 'root'
 })
 export class UserService {
-  getUsers(): Observable<IUsata> {
-    return this.Http.get<IUsata>(`${this.baseUrl}/users`);
-  }
 
-  private _loggedInUser: IUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}') as IUser;
+  private _loggedInUser: User = JSON.parse(localStorage.getItem('loggedInUser') || '{}') as User;
 
-  get loggedInUser(): IUser {
+  get loggedInUser(): User {
     return this._loggedInUser;
   }
   private baseUrl = 'https://dummyjson.com';
 
-  set loggedInUser(user: IUser) {
+  set loggedInUser(user: User) {
     this._loggedInUser = user;
     localStorage.setItem('loggedInUser', JSON.stringify(user));
   }
 
+
+
+
   constructor(private Http: HttpClient) { }
 
  
-  data : Observable<IUsata>= new Observable((subscriber)=>{this.Http.get<IUsata>("https://dummyjson.com/users").subscribe((data:IUsata)=>{subscriber.next(data)})})
+  data : Observable<Usata>= new Observable((subscriber)=>{this.Http.get<Usata>("https://dummyjson.com/users").subscribe((data:Usata)=>{subscriber.next(data)})})
 
-  
+  users: Observable<User>=new Observable((subscriber)=>{this.data.subscribe((data:Usata)=> {
+    data.users.map((user: User) => {
+      subscriber.next(user);
+    });
+  });
+})
+
 }
-export interface IUser {
+export interface User {
   id: number;
   firstName: string;
   lastName: string;
@@ -89,9 +95,10 @@ export interface IUser {
   ein: string;
   ssn: string;
   userAgent: string;
+  showDetails?: boolean;
 }
-export interface IUsata {
-  users: IUser[];
+export interface Usata {
+  users: User[];
   total: number;
   skip: number;
   limit: number;

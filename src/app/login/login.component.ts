@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { IUsata, UserService } from 'src/app/services/user.service';
+import { Usata, UserService } from 'src/app/services/user.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -15,11 +15,12 @@ export class LoginComponent {
   lastName: string = '';
   
   constructor(private router: Router, private userservice: UserService) { }
+  
 
   LoginUser() {
     const loginTime = new Date();
     // Check if firstName and lastName match the corresponding properties in data
-    this.userservice.data.subscribe((data: IUsata) => {
+    this.userservice.data.subscribe((data: Usata) => {
       const foundUser = data.users.find(user => user.firstName === this.firstName && user.lastName === this.lastName);
       if (foundUser) {
         localStorage.setItem('loginTime', loginTime.toISOString());
@@ -57,6 +58,6 @@ export class LoginComponent {
 
   ngOnInit() {
     this.fetchData();
-    this.userservice.data.subscribe((data: IUsata) => console.log(data))
+    this.userservice.data.subscribe((data: Usata) => console.log(data))
   }
 }

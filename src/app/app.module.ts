@@ -9,6 +9,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HlavnastrankaComponent } from './hlavnastranka/hlavnastranka.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms'; 
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { FormsModule } from '@angular/forms';
     NgbModule,
     RouterModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
