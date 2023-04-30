@@ -32,19 +32,19 @@
     <div class="row">
       <div class="col">
         <div *ngFor="let user of users">
-          <div  (click)="viewDetails(user)">
+          <div  (click)="selectUser(user)">
             {{ user.firstName }} {{ user.lastName }}<br>
-            <button *ngIf="selectedUser === user">View details</button>
+            <button *ngIf="selectedUser === user" (click)="toskovecf()" >View details</button>
             <button *ngIf="selectedUser === user">Start Chat</button>
           </div>
         </div>
       </div>
       <div class="col">
         
-      <div *ngIf="selectedUser">
-        <h2>{{ selectedUser.firstName }} {{ selectedUser.lastName }}</h2>
-        <p>Email: {{ selectedUser.email }}</p>
-        <p>Phone: {{ selectedUser.phone }}</p>
+      <div *ngIf="toskov">
+        <h2>{{ selectedUser?.firstName }} {{ selectedUser?.lastName }}</h2>
+        <p>Email: {{ selectedUser?.email }}</p>
+        <p>Phone: {{ selectedUser?.phone }}</p>
       </div>
     </div>
   </div>

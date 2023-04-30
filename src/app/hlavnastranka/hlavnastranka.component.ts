@@ -16,6 +16,9 @@ export class HlavnastrankaComponent implements OnInit {
   loginTime!: string;
   clickCounter = 0;
   selectedUser: User | undefined;
+  expandedUser: User | undefined;
+  toskov: boolean = false;
+
   
 
   incrementCounter() {
@@ -38,11 +41,19 @@ export class HlavnastrankaComponent implements OnInit {
     localStorage.removeItem('loginTime');
   }
 
-  viewDetails(user: User) {
+  selectUser(user: User) {
     this.selectedUser = user;
-    this.selectedUser.showDetails = true;
+  }  
+
+  toskovecf(){
+    this.toskov=false
+    if(this.toskov=false){console.log("haa")}
+    
   }
 
+
 }
+
+  
 
 const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}') as User;
